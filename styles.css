@@ -314,13 +314,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .case-study-links a:hover{ text-decoration: underline; }
 
 /* -------------------------------- experience --------------------------------- */
-.experience-entry, .education-entry{
+.experience-entry{
   display: grid; grid-template-columns: 160px 1fr; gap: var(--space-6);
   padding-block: var(--space-6); border-top: 1px solid var(--border);
 }
-.education-entry{ padding-top: var(--space-6); }
 .experience-when{ display: flex; flex-direction: column; font-size: 0.85rem; color: var(--ink-3); font-weight: 600; letter-spacing: .02em; }
-.experience-org{ color: var(--ink-2); margin: 2px 0 var(--space-4) 0; }
 .experience-points{ display: flex; flex-direction: column; gap: var(--space-2); }
 .experience-points li{ font-size: 0.94rem; color: var(--ink-2); padding-left: 1.2em; position: relative; max-width: 62ch; }
 .experience-points li::before{ content: "—"; position: absolute; left: 0; color: var(--accent); }
@@ -384,7 +382,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .skills-grid{ grid-template-columns: 1fr 1fr; }
   .contact-grid{ grid-template-columns: 1fr; }
   .case-study-phases > li{ grid-template-columns: 1fr; gap: var(--space-2); }
-  .experience-entry, .education-entry{ grid-template-columns: 1fr; gap: var(--space-2); }
+  .experience-entry{ grid-template-columns: 1fr; gap: var(--space-2); }
 }
 
 @media (max-width: 640px){
