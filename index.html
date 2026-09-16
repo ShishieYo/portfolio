@@ -3,570 +3,414 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Jerreld Romulo — Vibe Coder</title>
-<meta name="description" content="Self-taught, AI-assisted builder who ships side projects for fun — queueing platforms, verification portals, and workflow automation, born from curiosity and a lot of prompting." />
-<meta name="theme-color" content="#0A0E14"/>
+<title>Jerreld Romulo — Public Service × Digital Transformation</title>
+<meta name="description" content="Jerreld Romulo leads regional licensure and registration operations for the Philippine government, and designs and ships the digital systems — queueing platforms, verification portals, workflow tools — that those operations run on." />
+<meta name="theme-color" content="#F6F4EF" />
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#090C11;
-    --bg-elev:#10151d;
-    --bg-elev-2:#141b26;
-    --border:#1e2632;
-    --border-soft:#161d27;
-    --text:#EDF0F4;
-    --muted:#8E99A8;
-    --muted-2:#5b6572;
-    --accent:#3DDC97;
-    --accent-2:#4C8DFF;
-    --accent-3:#B18CFF;
-    --accent-dim:rgba(61,220,151,0.12);
-    --mono: "JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
-    --sans: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-    --maxwidth:1160px;
-    --radius:16px;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    background:
-      radial-gradient(900px 520px at 88% -8%, rgba(76,141,255,0.14), transparent 60%),
-      radial-gradient(700px 500px at -5% 8%, rgba(61,220,151,0.10), transparent 60%),
-      radial-gradient(800px 600px at 50% 120%, rgba(177,140,255,0.08), transparent 60%),
-      var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    position:relative;
-  }
-  body::before{
-    content:"";
-    position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size:56px 56px;
-    mask-image:radial-gradient(900px 700px at 50% 0%, black, transparent 75%);
-  }
-  .container{max-width:var(--maxwidth);margin:0 auto;padding:28px 24px;position:relative;z-index:1}
-  a{color:inherit}
-  ::selection{background:var(--accent-dim);color:var(--text)}
-
-  @keyframes fadeUp{ from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-  .reveal{animation:fadeUp .7s cubic-bezier(.16,.8,.3,1) both}
-  .reveal-1{animation-delay:.05s} .reveal-2{animation-delay:.15s} .reveal-3{animation-delay:.25s} .reveal-4{animation-delay:.35s}
-
-  /* Header */
-  header.site{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:14px 0;gap:18px;position:sticky;top:0;z-index:40;
-    background:rgba(9,12,17,0.72);backdrop-filter:blur(14px) saturate(140%);
-    border-bottom:1px solid var(--border-soft);
-  }
-  .header-inner{max-width:var(--maxwidth);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;width:100%}
-  .brand{display:flex;gap:12px;align-items:center}
-  .header-photo{width:40px;height:40px;border-radius:11px;overflow:hidden;display:inline-grid;place-items:center;background:linear-gradient(160deg,var(--accent),var(--accent-2));flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,0.06), 0 6px 16px rgba(61,220,151,0.18);}
-  .header-photo img{width:100%;height:100%;object-fit:cover;display:block}
-  .header-fallback{width:100%;height:100%;display:grid;place-items:center;color:#06110c;font-weight:800;font-size:14px;}
-  .brand-name{font-weight:700;font-size:14.5px;letter-spacing:-0.01em}
-  .brand-tag{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
-  nav.top{display:flex;gap:28px;align-items:center}
-  nav.top a{font-size:13.5px;color:var(--muted);text-decoration:none;font-weight:500;transition:color .15s}
-  nav.top a:hover{color:var(--text)}
-  nav.top .nav-cta{color:#04140c;background:var(--accent);padding:9px 16px;border-radius:9px;font-weight:700;box-shadow:0 4px 14px rgba(61,220,151,0.25);transition:transform .15s, box-shadow .15s;}
-  nav.top .nav-cta:hover{color:#04140c;transform:translateY(-1px);box-shadow:0 6px 20px rgba(61,220,151,0.35)}
-
-  /* Hero */
-  main.hero{padding:72px 0 24px;display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:center}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:var(--mono);font-size:12px;color:var(--accent);
-    background:var(--accent-dim);border:1px solid rgba(61,220,151,0.25);
-    padding:6px 13px;border-radius:999px;
-  }
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:pulse 2s ease-in-out infinite}
-  @keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:.4} }
-  h1.headline{
-    font-size:47px;line-height:1.14;letter-spacing:-0.025em;margin:22px 0 0 0;
-    font-weight:800;
-  }
-  h1.headline .grad{
-    background:linear-gradient(90deg,var(--accent),var(--accent-2) 60%, var(--accent-3));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  p.lead{margin:20px 0 0 0;color:var(--muted);font-size:17px;max-width:560px}
-  .hero-buttons{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
-  .btn{
-    padding:13px 22px;border-radius:11px;border:1px solid transparent;
-    font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;
-    display:inline-flex;align-items:center;gap:8px;transition:transform .18s, filter .18s, box-shadow .18s, border-color .18s;
-  }
-  .btn.primary{background:linear-gradient(135deg,var(--accent),#2fc584);color:#04140c;box-shadow:0 8px 22px rgba(61,220,151,0.25)}
-  .btn.primary:hover{filter:brightness(1.06);transform:translateY(-2px);box-shadow:0 12px 28px rgba(61,220,151,0.35)}
-  .btn.secondary{background:rgba(255,255,255,0.02);border-color:var(--border);color:var(--text)}
-  .btn.secondary:hover{border-color:var(--muted-2);transform:translateY(-2px);background:rgba(255,255,255,0.04)}
-
-  .meta-row{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px;padding-top:28px;border-top:1px solid var(--border-soft)}
-  .meta-item .k{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.1em}
-  .meta-item .v{font-size:14px;margin-top:5px;color:var(--text);font-weight:600}
-
-  /* hero visual: terminal card */
-  .hero-visual{position:relative}
-  .terminal{
-    background:linear-gradient(180deg,var(--bg-elev),var(--bg-elev-2));
-    border:1px solid var(--border);border-radius:var(--radius);
-    box-shadow:0 30px 70px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.02) inset;
-    overflow:hidden;
-  }
-  .terminal-bar{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--border-soft);background:rgba(255,255,255,0.015)}
-  .tdot{width:10px;height:10px;border-radius:50%}
-  .tdot.r{background:#ff5f57} .tdot.y{background:#febc2e} .tdot.g{background:#28c840}
-  .terminal-title{margin-left:8px;font-family:var(--mono);font-size:11.5px;color:var(--muted-2)}
-  .terminal-body{padding:22px 20px;font-family:var(--mono);font-size:12.8px;line-height:1.95}
-  .terminal-body .c1{color:var(--accent)}
-  .terminal-body .c2{color:var(--accent-2)}
-  .terminal-body .c3{color:var(--accent-3)}
-  .terminal-body .cm{color:var(--muted-2)}
-  .terminal-body .cw{color:var(--text)}
-  .caret{display:inline-block;width:7px;height:14px;background:var(--accent);vertical-align:middle;margin-left:2px;animation:blink 1.1s step-end infinite}
-  @keyframes blink{ 50%{opacity:0} }
-  .glow-orb{position:absolute;border-radius:50%;filter:blur(60px);z-index:-1;opacity:.5}
-  .glow-orb.a{width:220px;height:220px;background:var(--accent);top:-40px;right:-40px}
-  .glow-orb.b{width:180px;height:180px;background:var(--accent-2);bottom:-30px;left:-30px}
-
-  /* sections */
-  section{margin-top:96px}
-  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:30px}
-  .section-num{font-family:var(--mono);color:var(--accent);font-size:13px}
-  h2.section-title{font-size:27px;margin:0;letter-spacing:-0.015em;font-weight:800}
-  p.section-sub{color:var(--muted);margin:10px 0 0 0;max-width:640px}
-
-  /* about */
-  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:28px}
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0));
-    background-color:var(--bg-elev);
-    border:1px solid var(--border);border-radius:var(--radius);
-    padding:28px;
-    transition:border-color .2s, transform .2s;
-  }
-  .card p{color:var(--muted);margin:0 0 13px 0;font-size:14.5px}
-  .card p:last-child{margin-bottom:0}
-  .card h3{margin:0 0 13px 0;font-size:16.5px;color:var(--text);font-weight:700}
-  .facts dl{display:grid;grid-template-columns:auto 1fr;gap:12px 16px;margin:0}
-  .facts dt{font-family:var(--mono);font-size:11.5px;color:var(--muted-2);white-space:nowrap;padding-top:1px}
-  .facts dd{margin:0;font-size:14px;color:var(--text)}
-
-  .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-  .chip{
-    font-family:var(--mono);font-size:12px;color:var(--accent);
-    background:var(--accent-dim);border:1px solid rgba(61,220,151,0.22);
-    padding:6px 12px;border-radius:8px;transition:transform .15s, background .15s;
-  }
-  .chip:hover{transform:translateY(-2px);background:rgba(61,220,151,0.2)}
-
-  /* project cards */
-  .projects{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-  .project-card{
-    position:relative;
-    background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius);
-    padding:2px;display:flex;flex-direction:column;gap:0;
-    transition:border-color .25s, transform .25s, box-shadow .25s;
-    overflow:hidden;
-  }
-  .project-card::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
-    background:linear-gradient(135deg, rgba(61,220,151,0), rgba(61,220,151,0));
-    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite:xor;mask-composite:exclude;
-    transition:background .25s;pointer-events:none;
-  }
-  .project-card:hover{transform:translateY(-3px);box-shadow:0 20px 50px -20px rgba(0,0,0,0.5)}
-  .project-card:hover::before{background:linear-gradient(135deg, rgba(61,220,151,0.5), rgba(76,141,255,0.3))}
-  .project-inner{padding:26px;display:flex;flex-direction:column;gap:14px;height:100%}
-  .project-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-  .status-badge{
-    font-family:var(--mono);font-size:10.5px;padding:4px 10px;border-radius:999px;
-    white-space:nowrap;font-weight:700;letter-spacing:.03em;
-  }
-  .status-live{background:rgba(61,220,151,0.14);color:var(--accent);border:1px solid rgba(61,220,151,0.3)}
-  .status-pilot{background:rgba(76,141,255,0.14);color:var(--accent-2);border:1px solid rgba(76,141,255,0.3)}
-  .project-card h3{margin:0;font-size:19.5px;font-weight:700}
-  .project-card .sub{font-family:var(--mono);font-size:12px;color:var(--muted-2)}
-  .project-card p.desc{color:var(--muted);font-size:14.5px;margin:0}
-  .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-  .tag{font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--bg-elev-2);border:1px solid var(--border);padding:4px 9px;border-radius:6px}
-  .project-links{display:flex;gap:14px;margin-top:auto;padding-top:12px}
-  .project-links a{font-size:13px;font-weight:700;color:var(--accent-2);text-decoration:none;display:inline-flex;align-items:center;gap:5px}
-  .project-links a:hover{text-decoration:underline}
-  .impact-list{list-style:none;padding:0;margin:4px 0 0 0;display:flex;flex-direction:column;gap:7px}
-  .impact-list li{font-size:13.5px;color:var(--muted);padding-left:19px;position:relative}
-  .impact-list li::before{content:"→";position:absolute;left:0;color:var(--accent)}
-
-  /* services */
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .service-card{background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:transform .2s, border-color .2s}
-  .service-card:hover{transform:translateY(-3px);border-color:rgba(61,220,151,0.3)}
-  .service-card h3{margin:0 0 9px 0;font-size:15.5px;color:var(--text);font-weight:700}
-  .service-card p{margin:0;color:var(--muted);font-size:13.5px}
-  .service-icon{width:36px;height:36px;border-radius:10px;background:var(--accent-dim);display:grid;place-items:center;color:var(--accent);font-family:var(--mono);font-weight:800;margin-bottom:16px;border:1px solid rgba(61,220,151,0.2)}
-
-  /* contact */
-  .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:24px}
-  .contact-card{background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius);padding:30px}
-  .contact-card h3{margin:0 0 8px 0;font-size:19px;font-weight:700}
-  .contact-card p.lead-sm{color:var(--muted);font-size:14px;margin:0 0 22px 0}
-  label.field{display:block;margin-top:16px;font-size:13px;font-weight:600;color:var(--muted)}
-  label.field:first-of-type{margin-top:0}
-  .field input, .field textarea{
-    width:100%;padding:12px 13px;margin-top:7px;border-radius:10px;
-    border:1px solid var(--border);background:var(--bg-elev-2);color:var(--text);
-    font-family:var(--sans);font-size:14px;transition:border-color .15s, box-shadow .15s;
-  }
-  .field input:focus, .field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(61,220,151,0.12)}
-  .contact-note{font-size:12.5px;color:var(--muted-2);margin-top:12px}
-  .side-card{background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
-  .side-card h4{margin:0 0 14px 0;font-size:14px;color:var(--text);font-weight:700}
-  .side-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px}
-  .side-list li{font-size:13px;color:var(--muted);padding-left:17px;position:relative}
-  .side-list li::before{content:"•";position:absolute;left:0;color:var(--accent)}
-
-  footer{margin-top:90px;padding:30px 0;text-align:center;color:var(--muted-2);font-size:13px;border-top:1px solid var(--border-soft)}
-  footer .foot-mono{font-family:var(--mono);font-size:11.5px;margin-top:7px}
-
-  @media (max-width:980px){
-    main.hero{grid-template-columns:1fr}
-    .hero-visual{order:-1}
-  }
-  @media (max-width:900px){
-    .about-grid{grid-template-columns:1fr}
-    .projects{grid-template-columns:1fr}
-    .grid3{grid-template-columns:1fr}
-    .contact-grid{grid-template-columns:1fr}
-    nav.top{display:none}
-    h1.headline{font-size:32px}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="site">
-  <div class="header-inner">
-    <div class="brand">
-      <span class="header-photo" id="headerPhoto">
-        <img src="https://i.imgur.com/8EbjFDK.png" alt="Jerreld Romulo" onerror="this.onerror=null; document.getElementById('headerPhoto').innerHTML = '&lt;span class=&quot;header-fallback&quot;&gt;JR&lt;/span&gt;';">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="Jerreld Romulo — home">
+      <span class="brand-mark">
+        <img src="https://i.imgur.com/8EbjFDK.png" alt="Jerreld Romulo" width="38" height="38" loading="eager">
       </span>
-      <div>
-        <div class="brand-name">Jerreld Romulo</div>
-        <div class="brand-tag">vibe coder</div>
-      </div>
-    </div>
-    <nav class="top">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#services">Interests</a>
-      <a href="https://github.com/ShishieYo" target="_blank" rel="noopener">GitHub</a>
-      <a href="#contact" class="nav-cta">Say hi</a>
+      <span>
+        <span class="brand-name">Jerreld Romulo</span>
+        <span class="brand-tag">Operations × Digital Systems</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#work" data-nav>Work</a></li>
+        <li><a href="#experience" data-nav>Experience</a></li>
+      </ul>
+      <a class="nav-github" href="https://github.com/ShishieYo" target="_blank" rel="noopener" aria-label="GitHub profile (opens in a new tab)">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+      <a class="btn btn-ghost btn-sm" href="#contact">Contact</a>
     </nav>
+
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav" hidden>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://github.com/ShishieYo" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
   </div>
 </header>
 
-<div class="container">
+<main id="main">
 
-  <main class="hero">
-    <div>
-      <span class="eyebrow reveal"><span class="dot"></span>Probably prompting something into existence right now</span>
-      <h1 class="headline reveal reveal-1">I <span class="grad">vibe-code apps</span> until they actually work.</h1>
-      <p class="lead reveal reveal-2">No CS degree, no dev job title — just a government employee who got hooked on building software once AI pair-programming made "this is annoying, let me fix it" into a working prototype in a weekend. I build things I'd want to use, ship them, and keep tinkering.</p>
+  <!-- Hero -->
+  <section class="hero" id="top" aria-label="Introduction">
+    <div class="container">
+      <p class="eyebrow">— Public Service · Digital Transformation · Practical Technology</p>
+      <h1 class="display">I run public-sector operations. When the tools don't exist, <span class="accent-text">I build them.</span></h1>
+      <p class="lead">I'm a Supervising Professional Regulations Officer with the Professional Regulation Commission in Central Luzon, Philippines — leading regional licensure and registration operations. Outside my formal duties, I design and ship the digital systems those operations actually run on: queueing platforms, verification portals, workflow tools — using AI-assisted development to move from problem to working system fast.</p>
 
-      <div class="hero-buttons reveal reveal-3">
-        <a class="btn primary" href="#work">See what I've built</a>
-        <a class="btn secondary" href="https://github.com/ShishieYo" target="_blank" rel="noopener">GitHub ↗</a>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#work">View My Work</a>
+        <a class="btn btn-ghost" href="#contact">Get in Touch</a>
       </div>
 
-      <div class="meta-row reveal reveal-4">
-        <div class="meta-item"><div class="k">Location</div><div class="v">Pampanga, Central Luzon, PH</div></div>
-        <div class="meta-item"><div class="k">Day job</div><div class="v">Supervising Professional Regulations Officer</div></div>
-        <div class="meta-item"><div class="k">Focus</div><div class="v">Side projects · AI-assisted dev · learning in public</div></div>
-        <div class="meta-item"><div class="k">GitHub</div><div class="v"><a href="https://github.com/ShishieYo" target="_blank" rel="noopener">@ShishieYo ↗</a></div></div>
-      </div>
-    </div>
-
-    <div class="hero-visual reveal reveal-2">
-      <div class="glow-orb a"></div>
-      <div class="glow-orb b"></div>
-      <div class="terminal">
-        <div class="terminal-bar">
-          <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
-          <span class="terminal-title">jerreld@vibe — ~/side-projects</span>
+      <dl class="credibility-strip">
+        <div>
+          <dt>Role</dt>
+          <dd>Supervising Professional Regulations Officer, PRC Region III</dd>
         </div>
-        <div class="terminal-body">
-<div><span class="cm">$</span> <span class="cw">whoami</span></div>
-<div class="c1">jerreld_romulo · vibe coder</div>
-<div>&nbsp;</div>
-<div><span class="cm">$</span> <span class="cw">gh repo view queue-plus</span></div>
-<div><span class="cm">→</span> <span class="cw">backend</span> <span class="c2">supabase (postgres)</span></div>
-<div><span class="cm">→</span> <span class="cw">built with</span> <span class="c3">claude + a lot of trial and error</span></div>
-<div><span class="cm">→</span> <span class="cw">status</span> <span class="c1">shipped · people actually use it</span></div>
-<div>&nbsp;</div>
-<div><span class="cm">$</span> <span class="cw">gh repo view prvs</span></div>
-<div><span class="cm">→</span> <span class="cw">backend</span> <span class="c3">apps script + sheets</span></div>
-<div><span class="cm">→</span> <span class="cw">status</span> <span class="c1">in active use</span></div>
-<div>&nbsp;</div>
-<div><span class="cm">$</span> <span class="cw">open github.com/ShishieYo</span></div>
-<div>&nbsp;</div>
-<div><span class="cm">$</span><span class="caret"></span></div>
+        <div>
+          <dt>Location</dt>
+          <dd>Pampanga, Central Luzon, PH</dd>
         </div>
-      </div>
+        <div>
+          <dt>Tenure</dt>
+          <dd>Leading operations since 2021</dd>
+        </div>
+      </dl>
     </div>
-  </main>
+  </section>
 
-  <!-- Work -->
-  <section id="work">
-    <div class="section-head">
-      <span class="section-num">01</span>
-      <div>
-        <h2 class="section-title">Things I've shipped</h2>
-        <p class="section-sub">Real bottlenecks I got nerd-sniped by, then built with AI pair-programming, way too many browser tabs, and stubbornness.</p>
-      </div>
-    </div>
-
-    <div class="projects">
-
-      <article class="project-card">
-        <div class="project-inner">
-          <div class="project-top">
-            <div>
-              <h3>PROJECT QUEUE+</h3>
-              <div class="sub">AI-assisted electronic queue management</div>
-            </div>
-            <span class="status-badge status-live">LIVE · ADOPTED</span>
+  <!-- 01 — Who I Am -->
+  <section class="section" id="about" aria-labelledby="about-heading">
+    <div class="container">
+      <p class="section-label">01 — Who I Am</p>
+      <div class="about-grid">
+        <div class="about-side">
+          <div class="about-photo">
+            <img src="https://i.imgur.com/8EbjFDK.png" alt="Portrait of Jerreld Romulo" loading="lazy">
           </div>
-          <p class="desc">A low-cost electronic queue management system for PRC Region III — client queueing, staff processing, a live display board, and voice announcements. Originally built on Google Apps Script/Sheets, migrated to Supabase (Postgres) for real-time updates.</p>
-          <ul class="impact-list">
-            <li>Piloted July 2026, later formally adopted via office memorandum</li>
-            <li>Real-time sync across public ticketing, staff counters, and display board</li>
-            <li>Technical report &amp; research manuscript in development</li>
+          <dl class="about-facts">
+            <div><dt>Role</dt><dd>Supervising Professional Regulations Officer, PRC Region III</dd></div>
+            <div><dt>Location</dt><dd>Pampanga, Central Luzon, Philippines</dd></div>
+            <div><dt>Education</dt><dd>MPA, Philippine Christian University (2024)</dd></div>
+            <div><dt>Elsewhere</dt><dd><a href="https://github.com/ShishieYo" target="_blank" rel="noopener">GitHub ↗</a></dd></div>
+          </dl>
+        </div>
+
+        <div>
+          <h2 id="about-heading" class="h2">Operations is where I learned to see what technology should actually do.</h2>
+          <div class="prose">
+            <p>I didn't come to technology through a computer-science degree. I came to it through operations — through the queues, the paperwork, the verification requests, and the coordination problems that come with running licensure and registration services for a Philippine government agency.</p>
+            <p>Somewhere in that work, I started noticing the same pattern: a process that could clearly be simpler, if only the right small system existed for it. So I started building those systems myself — first in spreadsheets and Apps Script, later with proper databases and real-time infrastructure — using AI-assisted development to close the gap between an operational idea and a working prototype.</p>
+            <p>I'm not trying to become a full-time software engineer. I'm an operations leader who happens to build — and who's found that the two disciplines make each other sharper.</p>
+          </div>
+          <blockquote class="pull-quote">Operations is where I learned to see what technology should actually do.</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — Impact -->
+  <section class="section section-alt" id="impact" aria-labelledby="impact-heading">
+    <div class="container">
+      <p class="section-label">02 — Impact</p>
+      <h2 id="impact-heading" class="h2">The scale I operate at, and what I've shipped into it.</h2>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="stat-number">200,000+</span>
+          <span class="stat-label">Annual regulatory transactions supported across regional service locations</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" id="tenureStat">5+</span>
+          <span class="stat-label">Years leading licensure &amp; registration operations at PRC Region III</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">2</span>
+          <span class="stat-label">Self-directed digital systems designed and shipped into real government use</span>
+        </div>
+      </div>
+
+      <ul class="theme-tags" aria-label="Areas of operational responsibility">
+        <li>Multi-site service delivery</li>
+        <li>Large-scale licensure exam operations</li>
+        <li>Regulatory compliance</li>
+        <li>Inter-agency coordination</li>
+        <li>Process improvement</li>
+        <li>Public-service innovation</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 03 — What I Build -->
+  <section class="section" id="build" aria-labelledby="build-heading">
+    <div class="container prose-container">
+      <p class="section-label">03 — What I Build</p>
+      <h2 id="build-heading" class="h2">Problem-first, AI-assisted, tested in the real workflow.</h2>
+      <div class="prose">
+        <p>Every system I've built started the same way: something at work was slower, more error-prone, or more paper-dependent than it needed to be — and no one was going to fix it unless I did.</p>
+        <p>I build with AI-assisted development — sometimes called "vibe coding." In practice, that means directing an AI coding system (I use Claude) toward a specific operational problem, reviewing and testing everything it produces against how the work actually happens, and iterating until the system holds up under real use, not just in a demo.</p>
+        <p>I don't come from a traditional computer-science background. What I bring instead is the operational judgment to know which problems are worth solving, and the persistence to get an AI-assisted build from prototype to something my colleagues actually rely on.</p>
+      </div>
+
+      <aside class="definition-box" aria-label="What vibe coding means here">
+        <p class="definition-title">What "vibe coding" means here</p>
+        <ul>
+          <li>AI-directed, human-reviewed — not autogenerated and shipped blind</li>
+          <li>Built for one real workflow at a time, not a generic demo</li>
+          <li>Tested by the people who'll actually use it, before anything is called "done"</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 04 — Featured Work -->
+  <section class="section section-alt" id="work" aria-labelledby="work-heading">
+    <div class="container">
+      <p class="section-label">04 — Featured Work</p>
+      <h2 id="work-heading" class="h2">Two systems, still in active use, that started as personal initiatives.</h2>
+
+      <article class="case-study" aria-labelledby="queueplus-heading">
+        <header class="case-study-header">
+          <div>
+            <p class="case-study-kicker">AI-assisted electronic queue management</p>
+            <h3 id="queueplus-heading" class="h3">Project Queue+</h3>
+          </div>
+          <span class="status-tag">Live · Adopted office-wide</span>
+        </header>
+
+        <div class="flow-diagram" aria-hidden="true">
+          <span class="flow-step">Client</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Ticket</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Counter</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Display board</span>
+        </div>
+        <p class="flow-caption">All four reflect the same queue state in real time.</p>
+
+        <ol class="case-study-phases">
+          <li><h4>The problem</h4><p>Walk-in clients at PRC Region III's service counters queued manually, with no way for staff or clients to see wait status, and no live coordination between the ticketing desk, processing counters, and the public display board.</p></li>
+          <li><h4>Constraints</h4><p>No dedicated software budget or engineering team — this was self-directed work fit around a full-time operations role, built with tools already available in a government office before there was a case to justify anything more.</p></li>
+          <li><h4>The idea</h4><p>A low-cost electronic queueing system built first inside tools the office already trusted, with a path to upgrade the backend once the idea proved itself.</p></li>
+          <li><h4>The system</h4><p>Client-facing ticket generation, a staff processing console, and a live public display board with voice announcements — all reflecting the same queue state in real time.</p></li>
+          <li><h4>Implementation</h4><p>Started on Google Apps Script and Sheets to prove the workflow at zero infrastructure cost, then migrated the backend to Supabase (Postgres) for real-time sync once it needed to handle live, concurrent updates across ticketing, counters, and the display board reliably. Deployed on Netlify.</p></li>
+          <li><h4>Results</h4><p>Piloted in July 2026 and, after proving itself in daily use, formally adopted office-wide by memorandum. A technical report and research manuscript documenting the system are in development.</p></li>
+          <li><h4>What I learned</h4><p>Adoption in a government office depends as much on trust and fit with the existing workflow as on the technology itself — proving the idea cheaply, in the actual environment, mattered more than building the "best" version first.</p></li>
+        </ol>
+
+        <div class="case-study-footer">
+          <ul class="tag-row">
+            <li>Supabase</li><li>Postgres</li><li>Netlify</li><li>JavaScript</li><li>Google Apps Script (v1)</li>
           </ul>
-          <div class="tag-row">
-            <span class="tag">Supabase</span>
-            <span class="tag">Postgres</span>
-            <span class="tag">Netlify</span>
-            <span class="tag">JavaScript</span>
-          </div>
-          <div class="project-links">
+          <div class="case-study-links">
             <a href="https://project-queue-plus.netlify.app" target="_blank" rel="noopener">Live site ↗</a>
             <a href="https://github.com/ShishieYo/project-queue-plus" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
         </div>
       </article>
 
-      <article class="project-card">
-        <div class="project-inner">
-          <div class="project-top">
-            <div>
-              <h3>PRVS</h3>
-              <div class="sub">Professional Records Verification System</div>
-            </div>
-            <span class="status-badge status-pilot">IN USE</span>
+      <article class="case-study" aria-labelledby="prvs-heading">
+        <header class="case-study-header">
+          <div>
+            <p class="case-study-kicker">Verification &amp; inter-agency workflow</p>
+            <h3 id="prvs-heading" class="h3">PRVS — Professional Records Verification System</h3>
           </div>
-          <p class="desc">A verification portal connecting PRC and law enforcement (PNP ACG) — officers submit credential verification requests per individual, upload required documents, and track status in real time, replacing manual, paper-based coordination.</p>
-          <ul class="impact-list">
-            <li>Per-request tracking with status badges and 30-second auto-refresh</li>
-            <li>Built-in "Ask PRC" messaging tied to each request</li>
-            <li>Certificate issuance tracked by issuing office</li>
+          <span class="status-tag">In active use</span>
+        </header>
+
+        <div class="flow-diagram" aria-hidden="true">
+          <span class="flow-step">Submit request</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Verify &amp; coordinate</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Certificate issued</span>
+        </div>
+        <p class="flow-caption">Status is tracked end-to-end, with a 30-second auto-refresh.</p>
+
+        <ol class="case-study-phases">
+          <li><h4>The problem</h4><p>Verifying PRC-issued credentials for law-enforcement requests (PNP Anti-Cybercrime Group) ran through manual, paper-based coordination between agencies — slow, hard to track, and easy to lose status on.</p></li>
+          <li><h4>Constraints</h4><p>The system needed to work across two separate agencies' staff, handle document uploads securely, and fit within tools already available rather than requiring new agency-wide procurement.</p></li>
+          <li><h4>The idea</h4><p>A shared verification portal where officers could submit a request per individual, attach the required documents, and track status end-to-end, replacing the paper trail with a single system of record.</p></li>
+          <li><h4>The system</h4><p>Per-request submission and document upload, status tracking with a 30-second auto-refresh, a built-in "Ask PRC" messaging thread tied to each request, and certificate issuance tracked by issuing office.</p></li>
+          <li><h4>Implementation</h4><p>Built on Google Apps Script and Sheets with a custom HTML/CSS/JS front end — chosen to fit inside existing government-approved tooling and minimize procurement friction.</p></li>
+          <li><h4>Results</h4><p>In active use for inter-agency credential verification between PRC and PNP ACG.</p></li>
+          <li><h4>What I learned</h4><p>A system doesn't need a "modern" stack to be genuinely useful — it needs to fit the workflow and the constraints of the organizations actually using it.</p></li>
+        </ol>
+
+        <div class="case-study-footer">
+          <ul class="tag-row">
+            <li>Apps Script</li><li>Google Sheets</li><li>HTML/CSS/JS</li>
           </ul>
-          <div class="tag-row">
-            <span class="tag">Apps Script</span>
-            <span class="tag">Google Sheets</span>
-            <span class="tag">HTML/CSS/JS</span>
-          </div>
-          <div class="project-links">
+          <div class="case-study-links">
             <a href="https://github.com/ShishieYo" target="_blank" rel="noopener">More on GitHub ↗</a>
           </div>
         </div>
       </article>
-
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about">
-    <div class="section-head">
-      <span class="section-num">02</span>
-      <div>
-        <h2 class="section-title">About</h2>
-      </div>
-    </div>
-    <div class="about-grid">
-      <div class="card">
-        <h3>Hi, I'm Jerreld — I build stuff because it's fun</h3>
-        <p>No CS degree, no dev job title. I'm a government employee who fell into building software once AI coding tools made it possible to go from "this workflow is broken" to a working prototype over a weekend. Most of what's on this page started as me being annoyed at something slow and clunky, then refusing to let it go until it worked.</p>
-        <p>I lean hard on AI pair-programming — Claude, mostly — to move fast and learn as I go, and I'm not shy about it: that's just how I build now. I don't always know the "proper" way to do things, but I ship, I break things, I fix them, and I put the code on GitHub.</p>
-        <div class="skills">
-          <span class="chip">Claude Code</span>
-          <span class="chip">Supabase</span>
-          <span class="chip">Google Apps Script</span>
-          <span class="chip">Python</span>
-          <span class="chip">R</span>
-          <span class="chip">Git &amp; GitHub</span>
-          <span class="chip">Netlify</span>
-        </div>
-      </div>
-      <div class="card facts">
-        <h3>Quick facts</h3>
-        <dl>
-          <dt>Day job</dt><dd>Supervising Professional Regulations Officer, PRC Region III</dd>
-          <dt>Coding since</dt><dd>Whenever AI made it click — self-taught, still learning</dd>
-          <dt>Education</dt><dd>MPA, Philippine Christian University (2024)</dd>
-          <dt>Location</dt><dd>Pampanga, Central Luzon, Philippines</dd>
-          <dt>GitHub</dt><dd><a href="https://github.com/ShishieYo" target="_blank" rel="noopener">github.com/ShishieYo ↗</a></dd>
-          <dt>Approach</dt><dd>Get nerd-sniped → prototype fast → ship it → keep tinkering</dd>
-        </dl>
-      </div>
-    </div>
-  </section>
+  <!-- 05 — Experience -->
+  <section class="section" id="experience" aria-labelledby="experience-heading">
+    <div class="container">
+      <p class="section-label">05 — Experience</p>
+      <h2 id="experience-heading" class="h2">Leading the operations these systems run inside of.</h2>
 
-  <!-- Services -->
-  <section id="services">
-    <div class="section-head">
-      <span class="section-num">03</span>
-      <div>
-        <h2 class="section-title">Things I geek out on</h2>
-        <p class="section-sub">The stuff I keep reaching for, project after project — mostly because it's genuinely fun to get working.</p>
-      </div>
-    </div>
-    <div class="grid3">
-      <div class="service-card">
-        <div class="service-icon">Q</div>
-        <h3>Real-time, live-updating UIs</h3>
-        <p>Anything with a live display board, a counter that updates itself, or a status that changes without a refresh — I will find an excuse to build one.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">V</div>
-        <h3>Turning paper processes into apps</h3>
-        <p>Taking a form, a logbook, or a spreadsheet someone's been manually updating for years and turning it into something that tracks itself.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">A</div>
-        <h3>Prompting my way through backend stuff</h3>
-        <p>Postgres, Apps Script, automations — I'm not a "real" backend dev, but with an AI pair-programmer and enough persistence, most of it is learnable on the job.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <div class="section-head">
-      <span class="section-num">04</span>
-      <div>
-        <h2 class="section-title">Let's talk</h2>
-        <p class="section-sub">Building something similar, stuck on a Supabase/Apps Script problem, or just want to talk shop about vibe coding? Send a message.</p>
-      </div>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <h3>Send a message</h3>
-        <p class="lead-sm">I read everything that comes through here. No email or phone listed on this site — GitHub's the other place to find me.</p>
-        <form id="contactForm" method="post" action="https://script.google.com/macros/s/AKfycbyO6L-ctBxZT8JJUa2elXyosWcqezwXamGpKzfZ6LymDHg21CTZDMXYsCCJZyOkg2HMzw/exec" onsubmit="return submitContact(event)">
-          <label class="field">Name
-            <input id="cf-name" name="name" type="text" required>
-          </label>
-          <label class="field">Email
-            <input id="cf-email" name="email" type="email" required>
-          </label>
-          <label class="field">Message
-            <textarea id="cf-message" name="message" rows="6" required placeholder="Brief project summary, expected users, timeline..."></textarea>
-          </label>
-          <button class="btn primary" type="submit" style="margin-top:16px;width:100%;justify-content:center">Send message</button>
-          <div id="formMsg" class="contact-note"></div>
-        </form>
-        <noscript class="contact-note">If JavaScript is disabled, use the web app URL directly to submit.</noscript>
-      </div>
-
-      <aside style="display:flex;flex-direction:column;gap:16px">
-        <div class="side-card">
-          <h4>Find me online</h4>
-          <ul class="side-list">
-            <li><a href="https://github.com/ShishieYo" target="_blank" rel="noopener">github.com/ShishieYo ↗</a></li>
+      <div class="experience-entry">
+        <div class="experience-when"><span>2021</span><span>— Present</span></div>
+        <div>
+          <h3 class="h3">Supervising Professional Regulations Officer</h3>
+          <p class="experience-org">Professional Regulation Commission — Region III, Central Luzon</p>
+          <ul class="experience-points">
+            <li>Lead licensure and registration operations across multiple regional service locations</li>
+            <li>Oversee large-scale licensure examination operations and regulatory services</li>
+            <li>Coordinate across agencies on verification and compliance workflows</li>
+            <li>Drive process improvement and operational planning for service delivery</li>
+            <li>Sponsor and personally build the office's digital-transformation initiatives</li>
           </ul>
         </div>
-        <div class="side-card">
-          <h4>How I roll</h4>
-          <ul class="side-list">
-            <li>I build what I'm curious about first</li>
-            <li>AI-assisted, learning in public</li>
-            <li>Real-world testing before anything's "done"</li>
-            <li>Happy to share code or notes if useful</li>
-          </ul>
+      </div>
+
+      <div class="education-entry">
+        <div class="experience-when"><span>2024</span></div>
+        <div>
+          <h3 class="h3-sm">Master in Public Administration</h3>
+          <p class="experience-org">Philippine Christian University</p>
         </div>
-      </aside>
+      </div>
+      <!-- TODO: add earlier roles / a fuller career-progression timeline if you want one — none fabricated here. -->
     </div>
   </section>
 
-  <footer>
-    © <span id="year"></span> Jerreld M. Romulo · <a href="https://github.com/ShishieYo" target="_blank" rel="noopener">github.com/ShishieYo</a>
-    <div class="foot-mono">Built with Supabase, Apps Script, Claude, and a lot of after-hours debugging.</div>
-  </footer>
-</div>
+  <!-- 06 — How I Work -->
+  <section class="section section-alt" id="how-i-work" aria-labelledby="how-heading">
+    <div class="container prose-container">
+      <p class="section-label">06 — How I Work</p>
+      <h2 id="how-heading" class="h2">The same discipline, applied to operations and to code.</h2>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+      <ol class="process-list">
+        <li>
+          <span class="process-index">01</span>
+          <div><h3>Start from a real operational problem</h3><p>Not a technology choice looking for a use case.</p></div>
+        </li>
+        <li>
+          <span class="process-index">02</span>
+          <div><h3>Prototype fast with AI-assisted development</h3><p>Scoped tightly to that one problem, nothing more.</p></div>
+        </li>
+        <li>
+          <span class="process-index">03</span>
+          <div><h3>Test it against the real workflow</h3><p>With the people who'll actually use it, not a demo audience.</p></div>
+        </li>
+        <li>
+          <span class="process-index">04</span>
+          <div><h3>Ship what holds up — then keep improving it</h3><p>Adoption is the real review process.</p></div>
+        </li>
+      </ol>
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function(evt){
-      const id = this.getAttribute('href').slice(1);
-      const section = document.getElementById(id);
-      if(!section) return;
-      evt.preventDefault();
-      const rect = section.getBoundingClientRect();
-      const targetY = window.pageYOffset + rect.top - 76;
-      window.scrollTo({ top: targetY, behavior: 'smooth' });
-    });
-  });
+      <p class="closing-line">It's the same discipline either way — public service or software: understand the real constraint, then build something that actually works within it.</p>
+    </div>
+  </section>
 
-  // Scroll-reveal for sections
-  const revealTargets = document.querySelectorAll('section, .project-card, .service-card');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.style.animation = 'fadeUp .7s cubic-bezier(.16,.8,.3,1) both';
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealTargets.forEach(el => { el.style.opacity = '0'; io.observe(el); });
+  <!-- 07 — Capabilities -->
+  <section class="section" id="skills" aria-labelledby="skills-heading">
+    <div class="container">
+      <p class="section-label">07 — Capabilities</p>
+      <h2 id="skills-heading" class="h2">Where operations and technology overlap.</h2>
 
-  async function submitContact(e){
-    e.preventDefault();
-    const form = e.target;
-    const url = form.action || '';
-    const msgEl = document.getElementById('formMsg');
-    if(!url){
-      msgEl.textContent = "Form not configured. Please try again later.";
-      return false;
-    }
-    const fd = new FormData(form);
-    try{
-      const res = await fetch(url, {method:'POST', body: fd});
-      if(res.ok){
-        msgEl.textContent = "Thanks! I received your message and will reply within 24–48 hours.";
-        form.reset();
-        return true;
-      } else {
-        msgEl.textContent = "There was an issue sending the message. Please try again later.";
-        return false;
-      }
-    }catch(err){
-      msgEl.textContent = "Network error — please try again later.";
-      return false;
-    }
-  }
-</script>
+      <div class="skills-grid">
+        <div class="skills-group">
+          <h3>Operations &amp; Leadership</h3>
+          <ul>
+            <li>Licensure &amp; registration operations</li>
+            <li>Multi-site service delivery</li>
+            <li>Regulatory compliance</li>
+            <li>Inter-agency coordination</li>
+            <li>Process redesign</li>
+            <li>Stakeholder communication</li>
+          </ul>
+        </div>
+        <div class="skills-group">
+          <h3>Digital Systems</h3>
+          <ul>
+            <li>Supabase &amp; Postgres</li>
+            <li>Google Apps Script</li>
+            <li>Netlify</li>
+            <li>Git &amp; GitHub</li>
+            <li>Python</li>
+            <li>R</li>
+          </ul>
+        </div>
+        <div class="skills-group">
+          <h3>AI-Assisted Development</h3>
+          <ul>
+            <li>Claude Code</li>
+            <li>Rapid prototyping</li>
+            <li>Iterative testing with real users</li>
+            <li>Technical documentation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 — Contact -->
+  <section class="section section-alt" id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <p class="section-label">08 — Contact</p>
+      <h2 id="contact-heading" class="h2">Let's talk about operations, digital transformation, or what you're building.</h2>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <p class="lead" style="margin-top:0;font-size:0.98rem;max-width:none;">Tell me briefly what you're working on and your timeline — I read everything that comes through here. No email or phone listed on this site; GitHub's the other place to find me.</p>
+          <form id="contactForm" method="post" action="https://script.google.com/macros/s/AKfycbyO6L-ctBxZT8JJUa2elXyosWcqezwXamGpKzfZ6LymDHg21CTZDMXYsCCJZyOkg2HMzw/exec">
+            <label class="field" for="cf-name">Name
+              <input id="cf-name" name="name" type="text" required autocomplete="name">
+            </label>
+            <label class="field" for="cf-email">Email
+              <input id="cf-email" name="email" type="email" required autocomplete="email">
+            </label>
+            <label class="field" for="cf-message">Message
+              <textarea id="cf-message" name="message" rows="6" required placeholder="Brief summary, context, and timeline..."></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit" style="margin-top:1.5rem;width:100%;justify-content:center">Send message</button>
+            <p id="formMsg" class="contact-note" role="status" aria-live="polite"></p>
+          </form>
+          <noscript><p class="contact-note">JavaScript is required to submit this form — email details aren't listed on this site, so please enable JavaScript or reach out via GitHub.</p></noscript>
+        </div>
+
+        <aside>
+          <div class="side-card">
+            <h4>Find me online</h4>
+            <ul class="side-list">
+              <li><a href="https://github.com/ShishieYo" target="_blank" rel="noopener">github.com/ShishieYo ↗</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h4>How I work with new contacts</h4>
+            <ul class="side-list">
+              <li>Clear scoping and requirements upfront</li>
+              <li>Transparent timelines</li>
+              <li>Real-world testing before anything is called done</li>
+              <li>Documentation included</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-meta">© <span id="year"></span> Jerreld M. Romulo · <a href="https://github.com/ShishieYo" target="_blank" rel="noopener">github.com/ShishieYo</a></p>
+    <p class="footer-tag">Built independently, section by section, alongside a full-time role in public service.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
