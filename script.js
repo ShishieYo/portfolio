@@ -5,20 +5,29 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Tenure calculation (role started 2021) — static markup already shows a
-  // correct value for today; this just keeps it accurate on future visits.
+  // Tenure calculation (public service started 2017) — static markup already
+  // shows a correct value for today; this just keeps it accurate on future visits.
   const tenureEl = document.getElementById('tenureStat');
   if (tenureEl) {
-    const years = new Date().getFullYear() - 2021;
+    const years = new Date().getFullYear() - 2017;
     if (years > 0) tenureEl.textContent = `${years}+`;
   }
 
-  // Sticky header state
+  // Sticky header state + scroll progress bar
   const header = document.getElementById('siteHeader');
-  if (header) {
-    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  const progressBar = document.getElementById('scrollProgress');
+  if (header || progressBar) {
+    const onScroll = () => {
+      if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
+      if (progressBar) {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        progressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+      }
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
   }
 
   // Mobile nav toggle
@@ -102,6 +111,39 @@
     }, 3000);
   }
 
+  // Count-up animation for Impact stat numbers. Reads the already-correct
+  // rendered value (set statically in HTML, or by the tenure calc above) as
+  // the animation target, rather than duplicating it in a data attribute.
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    const statEls = document.querySelectorAll('.stat-number');
+    const countObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          countObserver.unobserve(entry.target);
+          const el = entry.target;
+          const finalText = el.textContent.trim();
+          const target = parseInt(finalText.replace(/[^\d]/g, ''), 10);
+          const suffix = finalText.replace(/[\d,]/g, '');
+          if (!Number.isFinite(target)) return;
+          const duration = 1100;
+          const start = performance.now();
+          const step = (now) => {
+            const progress = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = Math.round(target * eased);
+            el.textContent = value.toLocaleString('en-US') + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = finalText;
+          };
+          requestAnimationFrame(step);
+        });
+      },
+      { threshold: 0.6 }
+    );
+    statEls.forEach((el) => countObserver.observe(el));
+  }
+
   // Contact form submission
   const form = document.getElementById('contactForm');
   if (form) {
@@ -131,5 +173,5 @@
     });
   }
 
-  console.log('%cStill debugging in production — like everyone else.', 'color:#0B6358;font-weight:600;font-size:12px;');
+  console.log('%cStill debugging in production — like everyone else.', 'color:#A85708;font-weight:600;font-size:12px;');
 })();
