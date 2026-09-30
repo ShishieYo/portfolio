@@ -144,6 +144,30 @@
     statEls.forEach((el) => countObserver.observe(el));
   }
 
+  // Certification badge images: fall back to a simple icon if the badge
+  // host is ever unreachable, instead of showing a broken-image glyph.
+  document.querySelectorAll('.cert-icon img').forEach((img) => {
+    img.addEventListener('error', () => img.closest('.cert-icon').classList.add('has-error'), { once: true });
+  });
+
+  // Magnetic hover on buttons — subtle pull toward the cursor. Desktop with
+  // a precise pointer only; skipped entirely on touch or reduced-motion.
+  if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    const MAGNET_STRENGTH = 0.25;
+    const MAGNET_MAX = 8;
+    document.querySelectorAll('.btn').forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const relX = e.clientX - (rect.left + rect.width / 2);
+        const relY = e.clientY - (rect.top + rect.height / 2);
+        const x = Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, relX * MAGNET_STRENGTH));
+        const y = Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, relY * MAGNET_STRENGTH));
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  }
+
   // Contact form submission
   const form = document.getElementById('contactForm');
   if (form) {
