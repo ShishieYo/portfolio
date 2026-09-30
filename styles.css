@@ -1,8 +1,8 @@
 /* ==========================================================================
    Jerreld Romulo — portfolio
    Design tokens + component styles.
-   Two type families only: Fraunces (display) + Inter (UI/body).
-   Palette: Merino / Rock Blue / Venice Blue (single locked light theme).
+   Two type families only: Fraunces (display) + IBM Plex Sans (UI/body).
+   Palette: white + blue (Venice Blue primary accent, Rock Blue decorative).
    ========================================================================== */
 
 :root{
@@ -10,10 +10,10 @@
   --ink:        #16232C;
   --ink-2:      #3E4C56;
   --ink-3:      #546069;
-  --paper:      #E1DBD0;  /* Merino */
+  --paper:      #FFFFFF;
   --surface:    #FFFFFF;
-  --surface-2:  #E9EDF2;  /* pale Rock Blue tint */
-  --border:     #D2CBBD;
+  --surface-2:  #EAF0F6;  /* pale blue alt-band tint */
+  --border:     #D7E1EA;
   --input-border: #546A89;
   --accent:       #2C5778;  /* Venice Blue */
   --accent-ink:   #FFFFFF;
