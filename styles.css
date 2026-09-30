@@ -26,7 +26,7 @@
 
   /* --- type --- */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --fs-display: clamp(2.5rem, 1.9rem + 2.8vw, 4.25rem);
   --fs-h2: clamp(1.65rem, 1.35rem + 1.4vw, 2.375rem);
@@ -99,7 +99,11 @@ button{ font: inherit; color: inherit; background: none; border: 0; cursor: poin
 .prose p{ max-width: var(--prose-max); color: var(--ink-2); }
 
 .section{ padding-block: clamp(4rem, 3rem + 4vw, 8rem); }
-.section-alt{ background: var(--surface-2); }
+.section-alt{
+  background:
+    radial-gradient(900px 420px at 12% 0%, var(--accent-soft) 0%, transparent 60%),
+    var(--surface-2);
+}
 
 .section-label{
   font-family: var(--font-sans);
