@@ -55,6 +55,12 @@
   --container-max: 1200px;
   --prose-max: 680px;
   --header-h: 76px;
+
+  /* --- motion system: one shared vocabulary for every transition --- */
+  --ease-standard: cubic-bezier(.16,.8,.3,1);
+  --dur-fast: .15s;
+  --dur-base: .25s;
+  --dur-slow: .6s;
 }
 
 /* Theme is intentionally locked to the light white/amber palette above —
@@ -140,7 +146,7 @@ button{ font: inherit; color: inherit; background: none; border: 0; cursor: poin
   position: absolute; left: var(--space-4); top: -60px;
   background: var(--ink); color: var(--paper);
   padding: var(--space-3) var(--space-5); border-radius: var(--radius-sm);
-  z-index: 200; transition: top .15s ease;
+  z-index: 200; transition: top var(--dur-fast) ease;
 }
 .skip-link:focus{ top: var(--space-4); }
 
@@ -156,7 +162,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: 600; font-size: 0.95rem;
   padding: 0.85em 1.5em; border-radius: var(--radius-sm);
   border: 1px solid transparent; text-decoration: none;
-  transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+  transition: transform var(--dur-fast) ease, background var(--dur-fast) ease, border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
 }
 .btn-primary{ background: var(--accent); color: var(--accent-ink); }
 .btn-primary:hover{ transform: translateY(-1px); box-shadow: var(--shadow-md); }
@@ -192,7 +198,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   position: sticky; top: 0; z-index: 100;
   background: var(--paper);
   border-bottom: 1px solid transparent;
-  transition: border-color .2s ease, box-shadow .2s ease;
+  transition: border-color var(--dur-base) ease, box-shadow var(--dur-base) ease;
 }
 .site-header.is-scrolled{ border-color: var(--border); box-shadow: var(--shadow-sm); }
 .header-inner{ display: flex; align-items: center; justify-content: space-between; height: var(--header-h); gap: var(--space-5); }
@@ -211,12 +217,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .site-nav ul a[aria-current="true"]::after{
   content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: var(--accent);
 }
-.nav-github{ display: inline-flex; color: var(--ink-2); transition: color .15s ease, transform .15s ease; }
+.nav-github{ display: inline-flex; color: var(--ink-2); transition: color var(--dur-fast) ease, transform var(--dur-fast) ease; }
 .nav-github:hover{ color: var(--accent); transform: translateY(-1px); }
 .nav-github svg{ width: 19px; height: 19px; }
 
 .nav-toggle{ display: none; width: 40px; height: 40px; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
-.nav-toggle span{ width: 20px; height: 2px; background: var(--ink); transition: transform .2s ease, opacity .2s ease; }
+.nav-toggle span{ width: 20px; height: 2px; background: var(--ink); transition: transform var(--dur-base) ease, opacity var(--dur-base) ease; }
 .nav-toggle[aria-expanded="true"] span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
@@ -237,6 +243,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
   pointer-events: none; z-index: 0;
 }
+.hero::after{
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, var(--input-border) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: .08;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 85%);
+  pointer-events: none; z-index: 0;
+}
 .hero .container{ position: relative; z-index: 1; }
 .hero-mission{
   font-family: var(--font-display); font-weight: 500; font-style: italic;
@@ -247,7 +262,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 @keyframes heroFadeUp{ from{ opacity: 0; transform: translateY(16px); } to{ opacity: 1; transform: translateY(0); } }
 .hero .eyebrow, .hero .display, .hero .hero-mission, .hero .lead, .hero .hero-actions, .hero .credibility-strip{
-  animation: heroFadeUp .7s cubic-bezier(.16,.8,.3,1) both;
+  animation: heroFadeUp .7s var(--ease-standard) both;
 }
 .hero .eyebrow{ animation-delay: .02s; }
 .hero .display{ animation-delay: .1s; }
@@ -268,7 +283,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .about-grid{ display: grid; grid-template-columns: 300px 1fr; gap: var(--space-9); align-items: start; }
 .about-side{ position: sticky; top: calc(var(--header-h) + var(--space-6)); }
 .about-photo{ border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); aspect-ratio: 4/5; }
-.about-photo img{ width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.16,.8,.3,1); }
+.about-photo img{ width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease-standard); }
 .about-photo:hover img{ transform: scale(1.04); }
 .about-facts{ margin-top: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
 .about-facts dt{ font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .07em; color: var(--ink-3); font-weight: 600; }
@@ -303,7 +318,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
   padding: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
   margin-top: var(--space-7);
-  transition: transform .25s cubic-bezier(.16,.8,.3,1), box-shadow .25s ease, border-color .25s ease;
+  transition: transform var(--dur-base) var(--ease-standard), box-shadow var(--dur-base) ease, border-color var(--dur-base) ease;
 }
 .case-study:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--input-border); }
 .case-study:first-of-type{ margin-top: var(--space-8); }
@@ -364,19 +379,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .certifications{ margin-top: var(--space-8); padding-top: var(--space-7); border-top: 1px solid var(--border); }
 .certifications h3{ font-family: var(--font-sans); font-size: 0.85rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--ink-3); margin: 0 0 var(--space-5) 0; }
+.cert-row{ display: flex; flex-wrap: wrap; gap: var(--space-4); }
 .cert-card{
   display: inline-flex; align-items: center; gap: var(--space-4);
   border: 1px solid var(--border); border-radius: var(--radius-md);
   padding: var(--space-4) var(--space-5); background: var(--surface);
   text-decoration: none; color: inherit;
-  transition: transform .2s cubic-bezier(.16,.8,.3,1), box-shadow .2s ease, border-color .2s ease;
+  transition: transform var(--dur-base) var(--ease-standard), box-shadow var(--dur-base) ease, border-color var(--dur-base) ease;
 }
 .cert-card:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--input-border); }
 .cert-icon{
   display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0;
-  border-radius: 50%; background: var(--accent-2-soft); color: var(--accent-2);
+  border-radius: 50%; background: var(--accent-2-soft); overflow: hidden;
 }
-.cert-icon svg{ width: 22px; height: 22px; }
+.cert-icon img{ width: 100%; height: 100%; object-fit: contain; }
+.cert-fallback{ display: none; width: 22px; height: 22px; color: var(--accent-2); }
+.cert-icon.has-error img{ display: none; }
+.cert-icon.has-error .cert-fallback{ display: block; }
 .cert-name{ display: block; font-weight: 600; color: var(--ink); font-size: 0.98rem; }
 .cert-meta{ display: block; font-size: 0.85rem; color: var(--ink-3); margin-top: 2px; }
 
@@ -389,7 +408,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   width: 100%; margin-top: var(--space-2); padding: 0.8em 0.9em;
   border-radius: var(--radius-sm); border: 1px solid var(--input-border);
   background: var(--paper); color: var(--ink); font-family: inherit; font-size: 0.98rem;
-  transition: border-color .15s ease, box-shadow .15s ease;
+  transition: border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
 }
 .field input:focus, .field textarea:focus{ outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .contact-note{ font-size: 0.82rem; color: var(--ink-3); margin-top: var(--space-3); min-height: 1.2em; }
@@ -410,7 +429,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .footer-tag{ font-style: italic; font-size: 0.82rem; color: var(--ink-3); }
 
 /* ------------------------------ reveal on scroll -------------------------------- */
-.reveal-ready{ opacity: 0; transform: translateY(14px); transition: opacity .6s cubic-bezier(.16,.8,.3,1), transform .6s cubic-bezier(.16,.8,.3,1); }
+.reveal-ready{ opacity: 0; transform: translateY(14px); transition: opacity var(--dur-slow) var(--ease-standard), transform var(--dur-slow) var(--ease-standard); }
 .reveal-ready.is-visible{ opacity: 1; transform: translateY(0); }
 
 /* ------------------------------------ responsive ---------------------------------- */
