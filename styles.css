@@ -2,27 +2,27 @@
    Jerreld Romulo — portfolio
    Design tokens + component styles.
    Two type families only: Fraunces (display) + Inter (UI/body).
-   Light is the primary theme; dark follows prefers-color-scheme.
+   Palette: Merino / Rock Blue / Venice Blue (single locked light theme).
    ========================================================================== */
 
 :root{
-  /* --- color: light (default) --- */
-  --ink:        #201B12;
-  --ink-2:      #4C4330;
-  --ink-3:      #655C4A;
-  --paper:      #FFFCF7;
+  /* --- color --- */
+  --ink:        #16232C;
+  --ink-2:      #3E4C56;
+  --ink-3:      #546069;
+  --paper:      #E1DBD0;  /* Merino */
   --surface:    #FFFFFF;
-  --surface-2:  #FFF6E5;
-  --border:     #EFE2C8;
-  --input-border: #A38C57;
-  --accent:       #A85708;
+  --surface-2:  #E9EDF2;  /* pale Rock Blue tint */
+  --border:     #D2CBBD;
+  --input-border: #546A89;
+  --accent:       #2C5778;  /* Venice Blue */
   --accent-ink:   #FFFFFF;
-  --accent-soft:  #FFF1D6;
-  --accent-bright: #F5A623;
-  --accent-2: #0F6B5C;
-  --accent-2-soft: #E4F0EC;
-  --shadow-sm: 0 1px 2px rgba(32,27,18,0.05);
-  --shadow-md: 0 12px 32px -16px rgba(32,27,18,0.18);
+  --accent-soft:  #E1EAF0;
+  --accent-bright: #93A2BA;  /* Rock Blue */
+  --accent-2: #456080;
+  --accent-2-soft: #E3E9F0;
+  --shadow-sm: 0 1px 2px rgba(22,35,44,0.06);
+  --shadow-md: 0 12px 32px -16px rgba(22,35,44,0.2);
 
   /* --- type --- */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -357,6 +357,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   padding-block: var(--space-6); border-top: 1px solid var(--border);
 }
 .experience-when{ display: flex; flex-direction: column; font-size: 0.85rem; color: var(--ink-3); font-weight: 600; letter-spacing: .02em; }
+.concurrent-role{ font-size: 0.88rem; color: var(--accent-2); font-weight: 600; margin: 4px 0 var(--space-4) 0; }
 .experience-points{ display: flex; flex-direction: column; gap: var(--space-2); }
 .experience-points li{ font-size: 0.94rem; color: var(--ink-2); padding-left: 1.2em; position: relative; max-width: 62ch; }
 .experience-points li::before{ content: "—"; position: absolute; left: 0; color: var(--accent); }
