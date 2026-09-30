@@ -182,13 +182,15 @@
       }
       if (submitBtn) submitBtn.disabled = true;
       try {
-        const res = await fetch(url, { method: 'POST', body: new FormData(form) });
-        if (res.ok) {
-          if (msgEl) msgEl.textContent = 'Thanks — I received your message and will reply within 24–48 hours.';
-          form.reset();
-        } else if (msgEl) {
-          msgEl.textContent = 'There was an issue sending the message. Please try again later.';
-        }
+        // Google Apps Script /exec endpoints don't return CORS headers browsers
+        // accept, so a default (cors-mode) fetch reliably fails even when the
+        // script runs fine server-side. no-cors sends the request and lets it
+        // complete without the browser trying (and failing) to read the
+        // response — the trade-off is we can't inspect res.ok anymore, so a
+        // request that doesn't throw is treated as sent.
+        await fetch(url, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
+        if (msgEl) msgEl.textContent = 'Thanks — I received your message and will reply within 24–48 hours.';
+        form.reset();
       } catch (err) {
         if (msgEl) msgEl.textContent = 'Network error — please try again later.';
       } finally {
