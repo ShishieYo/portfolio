@@ -63,8 +63,8 @@
   --dur-slow: .6s;
 }
 
-/* Theme is intentionally locked to the light white/amber palette above —
-   no automatic dark mode — so the site always renders the same way
+/* Theme is intentionally locked to the white/blue palette above — no
+   automatic dark mode — so the site always renders the same way
    regardless of the visitor's OS/browser color-scheme preference. */
 
 /* ---------------------------------- reset --------------------------------- */
