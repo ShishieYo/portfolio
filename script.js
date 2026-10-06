@@ -13,6 +13,109 @@
     if (years > 0) tenureEl.textContent = `${years}+`;
   }
 
+  // Line-by-line reveal for the hero headline: split into words, measure
+  // the actual rendered line breaks, then group words into per-line
+  // overflow-clipped containers that slide up on load. The accent-colored
+  // span is preserved per word. Falls back to plain static text under
+  // reduced motion or if anything goes wrong measuring it.
+  const heroHeading = document.querySelector('.hero .display');
+  if (heroHeading && !reducedMotion) {
+    try {
+      const tokens = [];
+      heroHeading.childNodes.forEach((node) => {
+        const isAccent = node.nodeType === 1 && node.classList.contains('accent-text');
+        (node.textContent || '').split(/\s+/).filter(Boolean).forEach((word) => {
+          tokens.push({ word, accent: isAccent });
+        });
+      });
+
+      if (tokens.length) {
+        heroHeading.textContent = '';
+        const measureSpans = tokens.map((t) => {
+          const span = document.createElement('span');
+          span.textContent = t.word;
+          span.style.display = 'inline-block';
+          heroHeading.appendChild(span);
+          heroHeading.appendChild(document.createTextNode(' '));
+          return span;
+        });
+
+        // Group tokens by rendered line (consecutive words sharing an offsetTop).
+        const lines = [];
+        let currentTop = null;
+        measureSpans.forEach((span, i) => {
+          const top = span.offsetTop;
+          if (top !== currentTop) {
+            lines.push([]);
+            currentTop = top;
+          }
+          lines[lines.length - 1].push(tokens[i]);
+        });
+
+        heroHeading.textContent = '';
+        lines.forEach((lineTokens, lineIndex) => {
+          const clip = document.createElement('span');
+          clip.className = 'line-clip';
+          const inner = document.createElement('span');
+          inner.className = 'line-inner';
+          inner.style.transitionDelay = `${100 + lineIndex * 120}ms`;
+
+          let isFirst = true;
+          let openAccentSpan = null;
+          lineTokens.forEach((t) => {
+            const prefix = isFirst ? '' : ' ';
+            isFirst = false;
+            if (t.accent) {
+              if (!openAccentSpan) {
+                openAccentSpan = document.createElement('span');
+                openAccentSpan.className = 'accent-text';
+                inner.appendChild(openAccentSpan);
+              }
+              openAccentSpan.appendChild(document.createTextNode(prefix + t.word));
+            } else {
+              openAccentSpan = null;
+              inner.appendChild(document.createTextNode(prefix + t.word));
+            }
+          });
+
+          clip.appendChild(inner);
+          heroHeading.appendChild(clip);
+        });
+
+        requestAnimationFrame(() => {
+          heroHeading.querySelectorAll('.line-inner').forEach((el) => el.classList.add('is-visible'));
+        });
+      }
+    } catch (err) {
+      // If measurement fails for any reason, leave whatever text content
+      // is currently in the heading — never end up with a blank hero.
+    }
+  }
+
+  // Live Philippines-time clock in the header, explicit Asia/Manila timezone
+  // so it reads correctly regardless of the visitor's own device timezone.
+  const phClockEl = document.getElementById('phClock');
+  if (phClockEl) {
+    const updateClock = () => {
+      const now = new Date();
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Manila', hour: 'numeric', minute: '2-digit', hour12: true,
+      }).formatToParts(now);
+      const hour = parts.find((p) => p.type === 'hour').value;
+      const minute = parts.find((p) => p.type === 'minute').value;
+      const dayPeriod = parts.find((p) => p.type === 'dayPeriod').value.toLowerCase();
+      const dateParts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Manila', day: 'numeric', month: 'long', year: 'numeric',
+      }).formatToParts(now);
+      const day = dateParts.find((p) => p.type === 'day').value;
+      const month = dateParts.find((p) => p.type === 'month').value;
+      const year = dateParts.find((p) => p.type === 'year').value;
+      phClockEl.textContent = `${hour}:${minute}${dayPeriod} · ${day} ${month}, ${year} · PH`;
+    };
+    updateClock();
+    window.setInterval(updateClock, 30000);
+  }
+
   // Sticky header state + scroll progress bar
   const header = document.getElementById('siteHeader');
   const progressBar = document.getElementById('scrollProgress');
@@ -61,7 +164,11 @@
       if (!section) return;
       evt.preventDefault();
       const targetY = window.pageYOffset + section.getBoundingClientRect().top - headerHeight() - 12;
-      window.scrollTo({ top: targetY, behavior: reducedMotion ? 'auto' : 'smooth' });
+      if (window.__lenis) {
+        window.__lenis.scrollTo(targetY, { duration: 1 });
+      } else {
+        window.scrollTo({ top: targetY, behavior: reducedMotion ? 'auto' : 'smooth' });
+      }
       history.replaceState(null, '', `#${id}`);
     });
   });

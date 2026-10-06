@@ -20,7 +20,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%232C5778%22/%3E%3Ctext%20x%3D%2232%22%20y%3D%2243%22%20font-family%3D%22Georgia%2C%20serif%22%20font-size%3D%2227%22%20font-weight%3D%22600%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%3EJR%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
 {
@@ -69,6 +69,7 @@
         <li><a href="#work" data-nav>Work</a></li>
         <li><a href="#experience" data-nav>Experience</a></li>
       </ul>
+      <span class="ph-clock" id="phClock"></span>
       <a class="nav-github" href="https://github.com/ShishieYo" target="_blank" rel="noopener" aria-label="GitHub profile (opens in a new tab)">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
       </a>
@@ -102,8 +103,12 @@
       <p class="lead">I'm the Officer-in-Charge of the Licensure and Registration Division at the Professional Regulation Commission in Central Luzon, Philippines — leading regional licensure and registration operations. Outside my formal duties, I design and ship the digital systems those operations actually run on: queueing platforms, verification portals, workflow tools — through vibe coding, moving from problem to working system fast.</p>
 
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#work">View My Work</a>
-        <a class="btn btn-ghost" href="#contact">Get in Touch</a>
+        <a class="btn btn-primary btn-with-badge" href="#work">View My Work
+          <span class="btn-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="btn btn-ghost btn-with-badge" href="#contact">Get in Touch
+          <span class="btn-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
       </div>
 
       <dl class="credibility-strip">
@@ -154,7 +159,7 @@
   </section>
 
   <!-- 02 — Impact -->
-  <section class="section section-alt" id="impact" aria-labelledby="impact-heading">
+  <section class="section ink-panel" id="impact" aria-labelledby="impact-heading">
     <div class="container">
       <p class="section-label">02 — Impact</p>
       <h2 id="impact-heading" class="h2">The scale I operate at, and what I've shipped into it.</h2>
@@ -469,13 +474,36 @@
 
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer ink-panel">
+  <p class="footer-watermark" aria-hidden="true">JR</p>
   <div class="container footer-inner">
     <p class="footer-meta">© <span id="year"></span> Jerreld M. Romulo · <a href="https://github.com/ShishieYo" target="_blank" rel="noopener">github.com/ShishieYo</a></p>
     <p class="footer-tag">Built independently, section by section, alongside a full-time role in public service.</p>
   </div>
 </footer>
 
+<script type="importmap">
+{
+  "imports": {
+    "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.mjs"
+  }
+}
+</script>
+<script type="module">
+  // Real smooth-scroll via Lenis, progressively enhancing the native scrolling
+  // already in place. If the CDN module fails to load (offline, blocked), the
+  // rest of the site keeps working on native scroll — script.js never assumes
+  // window.__lenis exists.
+  import Lenis from 'lenis';
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.__lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    const raf = (time) => {
+      window.__lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }
+</script>
 <script src="script.js"></script>
 </body>
 </html>
