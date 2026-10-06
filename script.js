@@ -116,6 +116,57 @@
     window.setInterval(updateClock, 30000);
   }
 
+  // Word-by-word reveal for a handful of editorial "statement" passages: the
+  // hero lead, and the About/What-I-Build intro paragraphs. Mirrors the hero
+  // headline's progressive-enhancement approach — wrapped in try/catch with
+  // the original text restored on failure, so nothing is ever left blank.
+  if (!reducedMotion) {
+    const WORD_STAGGER_MS = 16;
+    const wordRevealTargets = [
+      { el: document.querySelector('.hero .lead'), delay: 500 },
+      ...Array.from(document.querySelectorAll('#about .prose p')).map((el) => ({ el, delay: 0 })),
+      ...Array.from(document.querySelectorAll('#build .prose p')).map((el) => ({ el, delay: 0 })),
+    ].filter((t) => t.el);
+
+    if (wordRevealTargets.length && 'IntersectionObserver' in window) {
+      wordRevealTargets.forEach(({ el, delay }) => {
+        const original = el.textContent;
+        try {
+          const words = original.split(/\s+/).filter(Boolean);
+          if (!words.length) return;
+          el.textContent = '';
+          words.forEach((word, i) => {
+            const span = document.createElement('span');
+            span.className = 'word-reveal';
+            span.textContent = word;
+            span.style.transitionDelay = `${delay + i * WORD_STAGGER_MS}ms`;
+            el.appendChild(span);
+            el.appendChild(document.createTextNode(i < words.length - 1 ? ' ' : ''));
+          });
+          el.classList.add('word-reveal-ready');
+        } catch (err) {
+          el.textContent = original;
+        }
+      });
+
+      const wordObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              wordObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      wordRevealTargets.forEach(({ el }) => wordObserver.observe(el));
+      window.setTimeout(() => {
+        document.querySelectorAll('.word-reveal-ready:not(.is-visible)').forEach((el) => el.classList.add('is-visible'));
+      }, 3000);
+    }
+  }
+
   // Sticky header state + scroll progress bar
   const header = document.getElementById('siteHeader');
   const progressBar = document.getElementById('scrollProgress');
@@ -306,5 +357,5 @@
     });
   }
 
-  console.log('%cStill debugging in production — like everyone else.', 'color:#2C5778;font-weight:600;font-size:12px;');
+  console.log('%cStill debugging in production — like everyone else.', 'color:#191917;font-weight:600;font-size:12px;');
 })();
