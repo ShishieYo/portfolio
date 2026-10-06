@@ -79,6 +79,14 @@
 /* ---------------------------------- reset --------------------------------- */
 *, *::before, *::after{ box-sizing: border-box; }
 html{ scroll-behavior: smooth; }
+/* Lenis drives scrolling itself via requestAnimationFrame once it loads, and
+   adds these classes to <html>. Leaving native CSS smooth-scroll active on
+   top of Lenis's own scroll loop is a documented source of stutter/lag, so
+   this cancels it the moment Lenis takes over; the base rule above remains
+   the fallback for when Lenis's CDN module hasn't loaded. */
+html.lenis, html.lenis body{ height: auto; }
+.lenis.lenis-smooth{ scroll-behavior: auto !important; }
+.lenis.lenis-stopped{ overflow: hidden; }
 body{
   margin: 0;
   background: var(--paper);
