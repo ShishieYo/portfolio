@@ -1,0 +1,26 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# SQLite needs a persistent disk, which Render only offers on paid web services.
+services:
+  - type: web
+    name: raaf-online
+    runtime: docker
+    rootDir: raaf
+    plan: starter
+    healthCheckPath: /api/health
+    disk:
+      name: raaf-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_PATH
+        value: /data/raaf.db
+      - key: SEED_DEMO_DATA
+        value: "false"
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false # you are prompted for this on first deploy; 12+ characters
+      - key: APP_TIMEZONE
+        value: Asia/Manila

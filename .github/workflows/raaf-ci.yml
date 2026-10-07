@@ -1,0 +1,24 @@
+name: RAAF Online CI
+
+on:
+  push:
+    paths: ["raaf/**", ".github/workflows/raaf-ci.yml"]
+  pull_request:
+    paths: ["raaf/**", ".github/workflows/raaf-ci.yml"]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: raaf
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: raaf/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
