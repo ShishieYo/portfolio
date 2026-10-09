@@ -412,6 +412,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .case-study-links a{ font-size: 0.88rem; font-weight: 600; color: var(--accent); text-decoration: none; }
 .case-study-links a:hover{ text-decoration: underline; }
 
+.side-project{
+  margin-top: var(--space-7); padding-top: var(--space-6);
+  border-top: 1px dashed var(--border); max-width: var(--prose-max);
+}
+.side-project-label{ font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .07em; color: var(--ink-3); font-weight: 600; margin: 0 0 var(--space-3) 0; }
+.side-project h3{ margin: 0 0 var(--space-3) 0; }
+.side-project p{ font-size: 0.94rem; color: var(--ink-2); margin: 0 0 var(--space-4) 0; }
+
 /* -------------------------------- experience --------------------------------- */
 .experience-entry{
   display: grid; grid-template-columns: 160px 1fr; gap: var(--space-6);
