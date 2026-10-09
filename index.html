@@ -217,7 +217,7 @@
   <section class="section section-alt" id="work" aria-labelledby="work-heading">
     <div class="container">
       <p class="section-label">04 — Featured Work</p>
-      <h2 id="work-heading" class="h2">Two systems, still in active use, that started as personal initiatives.</h2>
+      <h2 id="work-heading" class="h2">Systems built from personal initiative — two in active use, two still in progress.</h2>
 
       <article class="case-study" aria-labelledby="queueplus-heading">
         <header class="case-study-header">
@@ -291,6 +291,90 @@
           </div>
         </div>
       </article>
+
+      <article class="case-study" aria-labelledby="ehris-heading">
+        <header class="case-study-header">
+          <div>
+            <p class="case-study-kicker">Internal HR platform for a government regional office</p>
+            <h3 id="ehris-heading" class="h3">PRC Region III eHRIS</h3>
+          </div>
+          <span class="status-tag">In development</span>
+        </header>
+
+        <div class="flow-diagram" aria-hidden="true">
+          <span class="flow-step">Employee</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Supervisor</span><span class="flow-arrow">→</span>
+          <span class="flow-step">HR</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Approved &amp; audited</span>
+        </div>
+        <p class="flow-caption">Every HR request moves through the same configurable approval chain, with a full audit trail.</p>
+
+        <ol class="case-study-phases">
+          <li><h4>The problem</h4><p>Personnel records, leave, attendance, and HR service requests at a PRC regional office are scattered across paper files and spreadsheets — no single system of record, no enforced approval chain, and no way to audit who changed what.</p></li>
+          <li><h4>Constraints</h4><p>No dedicated software budget or engineering team; the data involved is sensitive government personnel information (TIN, GSIS, PhilHealth, Pag-IBIG), so access control has to actually hold up, not just look right in the interface.</p></li>
+          <li><h4>The idea</h4><p>One internal platform — employee records, digital PDS, leave and attendance, HR service requests — with permissions enforced at the database level, not just the UI, so an employee can never reach another employee's record regardless of what the screen shows.</p></li>
+          <li><h4>The system</h4><p>Employee master records, digital Personal Data Sheet, service record history, versioned private documents, time &amp; attendance with correction requests, leave filing and approval, HR requests (COE, certifications, corrections) with a visible approval timeline, a configurable workflow engine, and an immutable audit log.</p></li>
+          <li><h4>Implementation</h4><p>Built on Next.js (App Router, React, TypeScript) with Supabase (PostgreSQL + Row Level Security). The browser never talks to the database directly — every query runs server-side as the signed-in user, with permissions enforced in SQL so they hold regardless of what the UI shows.</p></li>
+          <li><h4>Results</h4><p>MVP complete and heavily tested — lint, type-checking, unit tests, database security tests (role-based access, row-level security, privilege escalation), and automated browser checks across every role all passing. Still in active development — not yet deployed or in office-wide use.</p></li>
+          <li><h4>What I learned</h4><p>For a system holding sensitive personnel data, the access control has to live in the database, not just the interface — proving that unauthorized access is actually blocked, not just hidden, mattered more than any single feature.</p></li>
+        </ol>
+
+        <div class="case-study-footer">
+          <ul class="tag-row">
+            <li>Next.js</li><li>React</li><li>TypeScript</li><li>Supabase</li><li>Postgres · Row Level Security</li>
+          </ul>
+          <div class="case-study-links">
+            <a href="https://github.com/ShishieYo/ehris-prc" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="case-study" aria-labelledby="raaf-heading">
+        <header class="case-study-header">
+          <div>
+            <p class="case-study-kicker">Validation engine for accountable-forms reporting</p>
+            <h3 id="raaf-heading" class="h3">RAAF Online</h3>
+          </div>
+          <span class="status-tag">In development</span>
+        </header>
+
+        <div class="flow-diagram" aria-hidden="true">
+          <span class="flow-step">Encode</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Validate</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Review</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Approved</span>
+        </div>
+        <p class="flow-caption">The same validation engine runs live in the browser and again on the server, so nothing passes review by accident.</p>
+
+        <ol class="case-study-phases">
+          <li><h4>The problem</h4><p>Monthly Report of Accountability for Accountable Forms (RAAF) submissions for board certificates were encoded in a shared Excel workbook with no automatic checks — mismatched totals and broken serial ranges were only caught by hand, if at all.</p></li>
+          <li><h4>Constraints</h4><p>Needed to match the office's existing monthly workbook format exactly, enforce a real four-eyes review (no one approves what they encoded), and keep a tamper-evident history of every change.</p></li>
+          <li><h4>The idea</h4><p>Move encoding into a guided form with the validation rules themselves stored as data, not hardcoded, so the office can tune a rule's severity or wording without needing a new deployment.</p></li>
+          <li><h4>The system</h4><p>Section-by-section encoding with live validation as you type, a shared rule engine that reruns server-side on submission, a four-eyes review workflow (draft → submit → approve or return), a full audit history, and CSV/Excel/print exports stamped with their validation status.</p></li>
+          <li><h4>Implementation</h4><p>Express and SQLite on the server, React and Vite on the client, sharing one validation engine between both. 41 rules ship by default, covering required fields, dates, numeric ranges, serial continuity, control-total reconciliation, and duplicate/carry-forward consistency.</p></li>
+          <li><h4>Results</h4><p>Feature-complete and fully tested — 69 automated tests covering the full encode → validate → review → approve workflow — with a one-command Docker deployment ready to go. Still in active development — not yet deployed for the office's actual monthly reporting.</p></li>
+          <li><h4>What I learned</h4><p>Treating validation rules as editable data instead of code turned out to matter as much as the rules themselves — the office can adjust a threshold or fix a message without waiting on a developer.</p></li>
+        </ol>
+
+        <div class="case-study-footer">
+          <ul class="tag-row">
+            <li>Node.js</li><li>Express</li><li>SQLite</li><li>React</li><li>TypeScript</li>
+          </ul>
+          <div class="case-study-links">
+            <a href="https://github.com/ShishieYo/raaf-online" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <aside class="side-project" aria-labelledby="sakay-na-heading">
+        <p class="side-project-label">Also built, just for fun</p>
+        <h3 id="sakay-na-heading" class="h3-sm">Sakay Na!</h3>
+        <p>A one-tap Filipino road-trip game — drive a jeepney, tricycle, taxi, UV Express, or provincial bus from Metro Manila to Ilocos and Bicol, dodging traffic and picking up passengers across 12 routes.</p>
+        <div class="case-study-links">
+          <a href="https://shishieyo.github.io/sakay-na/" target="_blank" rel="noopener">Play ↗</a>
+          <a href="https://github.com/ShishieYo/sakay-na" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -379,7 +463,9 @@
         <div class="skills-group">
           <h3>Digital Systems</h3>
           <ul>
-            <li>Supabase &amp; Postgres</li>
+            <li>Next.js, React &amp; TypeScript</li>
+            <li>Supabase &amp; Postgres, Row Level Security</li>
+            <li>Node.js &amp; Express</li>
             <li>Google Apps Script</li>
             <li>Netlify</li>
             <li>Git &amp; GitHub</li>
