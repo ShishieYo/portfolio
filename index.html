@@ -217,7 +217,7 @@
   <section class="section section-alt" id="work" aria-labelledby="work-heading">
     <div class="container">
       <p class="section-label">04 — Featured Work</p>
-      <h2 id="work-heading" class="h2">Systems built from personal initiative — two in active use, two still in progress.</h2>
+      <h2 id="work-heading" class="h2">Systems built from personal initiative — two in active use, three still in progress.</h2>
 
       <article class="case-study" aria-labelledby="queueplus-heading">
         <header class="case-study-header">
@@ -366,6 +366,43 @@
         </div>
       </article>
 
+      <article class="case-study" aria-labelledby="exam-portal-heading">
+        <header class="case-study-header">
+          <div>
+            <p class="case-study-kicker">Volunteer examination-personnel management</p>
+            <h3 id="exam-portal-heading" class="h3">PRC RO3 Licensure Examination Personnel Portal</h3>
+          </div>
+          <span class="status-tag">In development</span>
+        </header>
+
+        <div class="flow-diagram" aria-hidden="true">
+          <span class="flow-step">Registration</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Verification</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Assignment</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Deployment</span>
+        </div>
+        <p class="flow-caption">Every volunteer moves through the same nine-stage pipeline, with an audit trail at each step.</p>
+
+        <ol class="case-study-phases">
+          <li><h4>The problem</h4><p>Every licensure examination needs volunteer personnel — proctors, verifiers, support staff — recruited, vetted, assigned to rooms and shifts, then tracked for attendance and allowances, all coordinated by hand across spreadsheets and memos with no single system tying registration through to reporting.</p></li>
+          <li><h4>Constraints</h4><p>The data involved is real personnel information — names, TINs, bank details for allowances — so privacy and access control matter as much as on eHRIS. Assignment is a judgment call PRC management makes, not something a system should decide on its own.</p></li>
+          <li><h4>The idea</h4><p>One portal covering the whole pipeline — registration, verification, stated preferences, assignment, confirmation, deployment, attendance, allowance, CPD, and reporting — with a recommendation engine that suggests candidates to staff rather than assigning them automatically.</p></li>
+          <li><h4>The system</h4><p>Volunteer registration and document verification, a preference-collection step, an assignment workflow backed by a configurable in-browser recommendation engine, confirmation and approval steps, attendance recording, allowance and CPD-unit computation, an examination calendar, reporting dashboards, and bulk import for external personnel via CSV/XLSX.</p></li>
+          <li><h4>Implementation</h4><p>React 19, TypeScript, Vite, and Tailwind on the frontend, with Supabase (Postgres, Auth, Storage) on the backend. React Query for data fetching, React Hook Form and Zod for forms, Recharts for reporting. Database rules and row-level security are tested against an in-memory Postgres, alongside unit and browser smoke tests.</p></li>
+          <li><h4>Results</h4><p>Core pipeline built and tested — unit, database/RLS, and browser smoke tests all passing. Still in active development: several decisions (allowance amounts, CPD validation rules, approval requirements) are explicitly left open for PRC management to decide, and it hasn't been deployed to a hosted environment yet.</p></li>
+          <li><h4>What I learned</h4><p>Some things a system can compute cleanly — a recommendation score, an allowance total — and some things it shouldn't decide on its own — who gets approved, what counts as a qualifying day. Keeping those explicitly separate mattered more than getting every calculation right on the first try.</p></li>
+        </ol>
+
+        <div class="case-study-footer">
+          <ul class="tag-row">
+            <li>React</li><li>TypeScript</li><li>Supabase</li><li>Postgres</li><li>Tailwind CSS</li>
+          </ul>
+          <div class="case-study-links">
+            <a href="https://github.com/ShishieYo/prc-ro3-exam-portal" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </article>
+
       <aside class="side-project" aria-labelledby="sakay-na-heading">
         <p class="side-project-label">Also built, just for fun</p>
         <h3 id="sakay-na-heading" class="h3-sm">Sakay Na!</h3>
@@ -463,9 +500,9 @@
         <div class="skills-group">
           <h3>Digital Systems</h3>
           <ul>
-            <li>Next.js, React &amp; TypeScript</li>
+            <li>React, Next.js &amp; TypeScript</li>
             <li>Supabase &amp; Postgres, Row Level Security</li>
-            <li>Node.js &amp; Express</li>
+            <li>Node.js, Express &amp; Tailwind CSS</li>
             <li>Google Apps Script</li>
             <li>Netlify</li>
             <li>Git &amp; GitHub</li>
