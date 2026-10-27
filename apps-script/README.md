@@ -1,9 +1,19 @@
-# Contact form backend
+# Contact form backend (not currently used by the live site)
 
-`Code.gs` is the Google Apps Script backend behind the contact form on the
-live site (`index.html` → `#contactForm`). It used to live only in the Apps
-Script editor with no copy anywhere else — that's why it was possible to
-lose it entirely. It's committed here now so that never happens again.
+**Status:** the live contact form no longer calls this. After this backend's
+Apps Script project got silently deleted once already, and a redeploy after
+that still couldn't be verified end-to-end (this repo's dev environment has
+no network path to `script.google.com` to test it), the form was switched to
+a `mailto:` handoff — it opens the visitor's own email app with the message
+pre-filled, with nothing server-side to deploy, misconfigure, or lose. See
+`#contactForm` in `index.html` / the contact-form handler in `script.js`.
+
+`Code.gs` is kept here as a reference and an optional upgrade path, in case
+a real backend (e.g. for storing submissions, or sending from a fixed
+address) is wanted again later. It used to live only in the Apps Script
+editor with no copy anywhere else — that's why it was possible to lose it
+entirely. It's committed here so that never happens again, whether or not
+it's the live mechanism.
 
 ## Deploying (new project, e.g. after the old one was deleted)
 

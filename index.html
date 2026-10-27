@@ -557,8 +557,8 @@
 
       <div class="contact-grid">
         <div class="contact-card">
-          <p class="lead" style="margin-top:0;font-size:0.98rem;max-width:none;">Tell me briefly what you're working on and your timeline — I read everything that comes through here. No email or phone listed on this site; GitHub's the other place to find me.</p>
-          <form id="contactForm" method="post" action="https://script.google.com/macros/s/AKfycbyAv9fOCQb4ULETc_9VIG7Ylg4EFF5-ci9D1GKjbnZVfhnqFcGhESBe-pAkfUeQt4ZuJg/exec">
+          <p class="lead" style="margin-top:0;font-size:0.98rem;max-width:none;">Tell me briefly what you're working on and your timeline. This opens in your own email app, addressed to me, ready to send — I read everything that comes through.</p>
+          <form id="contactForm" method="get" action="mailto:jerreldromulo@gmail.com">
             <label class="field" for="cf-name">Name
               <input id="cf-name" name="name" type="text" required autocomplete="name">
             </label>
@@ -568,10 +568,10 @@
             <label class="field" for="cf-message">Message
               <textarea id="cf-message" name="message" rows="6" required placeholder="Brief summary, context, and timeline..."></textarea>
             </label>
-            <button class="btn btn-primary" type="submit" style="margin-top:1.5rem;width:100%;justify-content:center">Send message</button>
+            <button class="btn btn-primary" type="submit" style="margin-top:1.5rem;width:100%;justify-content:center">Open email to send</button>
             <p id="formMsg" class="contact-note" role="status" aria-live="polite"></p>
           </form>
-          <noscript><p class="contact-note">JavaScript is required to submit this form — email details aren't listed on this site, so please enable JavaScript or reach out via GitHub.</p></noscript>
+          <noscript><p class="contact-note">This form needs JavaScript to format the message nicely — you can also <a href="mailto:jerreldromulo@gmail.com">email me directly</a>.</p></noscript>
         </div>
 
         <aside>

@@ -1,5 +1,6 @@
 (() => {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const CONTACT_EMAIL = 'jerreldromulo@gmail.com';
 
   // Footer year
   const yearEl = document.getElementById('year');
@@ -326,34 +327,26 @@
     });
   }
 
-  // Contact form submission
+  // Contact form: hands off to the visitor's own email app via a mailto:
+  // link built from the filled-in fields, instead of posting to a backend.
+  // This has no server to deploy, misconfigure, or lose — the previous
+  // Apps Script backend kept breaking in ways this site couldn't detect
+  // or verify, so there's nothing left here that can fail silently.
   const form = document.getElementById('contactForm');
   if (form) {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const url = form.action || '';
+      const name = form.querySelector('#cf-name').value.trim();
+      const email = form.querySelector('#cf-email').value.trim();
+      const message = form.querySelector('#cf-message').value.trim();
       const msgEl = document.getElementById('formMsg');
-      const submitBtn = form.querySelector('button[type="submit"]');
-      if (!url) {
-        if (msgEl) msgEl.textContent = 'Form not configured. Please try again later.';
-        return;
-      }
-      if (submitBtn) submitBtn.disabled = true;
-      try {
-        // Google Apps Script /exec endpoints don't return CORS headers browsers
-        // accept, so a default (cors-mode) fetch reliably fails even when the
-        // script runs fine server-side. no-cors sends the request and lets it
-        // complete without the browser trying (and failing) to read the
-        // response — the trade-off is we can't inspect res.ok anymore, so a
-        // request that doesn't throw is treated as sent.
-        await fetch(url, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
-        if (msgEl) msgEl.textContent = 'Thanks — I received your message and will reply within 24–48 hours.';
-        form.reset();
-      } catch (err) {
-        if (msgEl) msgEl.textContent = 'Network error — please try again later.';
-      } finally {
-        if (submitBtn) submitBtn.disabled = false;
-      }
+
+      const subject = `Portfolio contact from ${name}`;
+      const body = `From: ${name} <${email}>\n\n${message}`;
+      const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      window.location.href = mailtoUrl;
+      if (msgEl) msgEl.textContent = 'Opening your email app with this message — just hit send there to deliver it.';
     });
   }
 
