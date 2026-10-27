@@ -350,5 +350,5 @@
     });
   }
 
-  console.log('%cStill debugging in production — like everyone else.', 'color:#191917;font-weight:600;font-size:12px;');
+  console.log('%cStill debugging in production — like everyone else.', 'color:#1475C9;font-weight:600;font-size:12px;');
 })();
