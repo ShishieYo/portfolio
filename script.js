@@ -14,6 +14,15 @@
     if (years > 0) tenureEl.textContent = `${years}+`;
   }
 
+  // Total professional experience (private + public sector, started 2011) —
+  // same pattern as the public-service tenure calc above, kept in sync
+  // across the hero and About facts.
+  const totalExpEls = document.querySelectorAll('#totalExpHero, #totalExpAbout');
+  if (totalExpEls.length) {
+    const totalYears = new Date().getFullYear() - 2011;
+    if (totalYears > 0) totalExpEls.forEach((el) => { el.textContent = `${totalYears}+`; });
+  }
+
   // Line-by-line reveal for the hero headline: split into words, measure
   // the actual rendered line breaks, then group words into per-line
   // overflow-clipped containers that slide up on load. The accent-colored
