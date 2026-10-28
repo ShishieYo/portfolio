@@ -17,7 +17,7 @@
   // Total professional experience (private + public sector, started 2011) —
   // same pattern as the public-service tenure calc above, kept in sync
   // across the hero and About facts.
-  const totalExpEls = document.querySelectorAll('#totalExpHero, #totalExpAbout');
+  const totalExpEls = document.querySelectorAll('#totalExpHero, #totalExpAbout, #totalExpImpact');
   if (totalExpEls.length) {
     const totalYears = new Date().getFullYear() - 2011;
     if (totalYears > 0) totalExpEls.forEach((el) => { el.textContent = `${totalYears}+`; });
