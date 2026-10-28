@@ -222,7 +222,7 @@
   <section class="section section-alt" id="work" aria-labelledby="work-heading">
     <div class="container">
       <p class="section-label">04 — Featured Work</p>
-      <h2 id="work-heading" class="h2">Systems built from personal initiative — two in active use, three still in progress.</h2>
+      <h2 id="work-heading" class="h2">Systems built from personal initiative — two in active use, three still in progress, one just for fun.</h2>
 
       <article class="case-study" aria-labelledby="queueplus-heading">
         <header class="case-study-header">
@@ -408,6 +408,40 @@
         </div>
       </article>
 
+      <article class="case-study" aria-labelledby="thorro-heading">
+        <header class="case-study-header">
+          <div>
+            <p class="case-study-kicker">Self-hosted game server, built for fun</p>
+            <h3 id="thorro-heading" class="h3">ThorRO — Private Ragnarok Online Server</h3>
+          </div>
+          <span class="status-tag">Personal project · Self-hosted</span>
+        </header>
+
+        <div class="flow-diagram" aria-hidden="true">
+          <span class="flow-step">Official Data</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Convert &amp; Script</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Build Patch</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Deploy to Players</span>
+        </div>
+        <p class="flow-caption">Official item updates are converted, scripted, and shipped to players through an auto-patcher.</p>
+
+        <ol class="case-study-phases">
+          <li><h4>The problem</h4><p>Wanted to test the newest official international Ragnarok Online (iRO) items before they're common, on a server I fully control — but that meant keeping a large, constantly-changing game database accurate against official updates by hand, which doesn't scale.</p></li>
+          <li><h4>Constraints</h4><p>Self-hosted on a home NAS behind a private Tailscale network for friends, with no commercial game-data license — every conversion from official item and monster data into the server's open-source format had to be built from scratch, in Docker, with no outside infrastructure.</p></li>
+          <li><h4>The idea</h4><p>Instead of hand-editing thousands of items, write tools that convert official item and monster data — and even their description text — directly into working server scripts, so an update comes from re-running a pipeline, not re-typing data by hand.</p></li>
+          <li><h4>The system</h4><p>A description-to-script translator that reads official item text and generates working effect scripts (refine conditions, autocasts, skill bonuses), which alone generated about 450 set bonuses. A monthly gacha system reproducing official reward rates, MVP boss rooms, a simulated player population across 15 towns, PvP arenas, and a custom client patcher shipping tens of thousands of sprite files through an auto-updater.</p></li>
+          <li><h4>Implementation</h4><p>rAthena (C++, Renewal mode) running in Docker Compose on a NAS, MariaDB, Python for data generation, Lua for client data files, an rPatchur-based patcher, and a FluxCP website — tested on a local staging build with headless bots driving in-game test scripts before anything ships to players.</p></li>
+          <li><h4>Results</h4><p>About 1,640 custom or updated items, 960 monsters, and 450 set bonuses; 9 published client patches shipping roughly 77,000 costume sprites and 4,453 official iRO sprites; up to 560 simulated players across 15 towns — all verified byte-for-byte before deploying, with generated files re-created from their tools rather than hand-edited.</p></li>
+          <li><h4>What I learned</h4><p>The same debugging discipline carries over from work to a hobby project. A player's HP capped at 1.1M turned out to be a server setting, not a data-type limit — found by tracing through server code, database columns, and network packets, then verified against a 3.8M HP character in-game, not just assumed fixed.</p></li>
+        </ol>
+
+        <div class="case-study-footer">
+          <ul class="tag-row">
+            <li>C++</li><li>Python</li><li>Docker</li><li>MariaDB</li><li>Lua</li><li>Tailscale</li>
+          </ul>
+        </div>
+      </article>
+
       <aside class="side-project" aria-labelledby="sakay-na-heading">
         <p class="side-project-label">Also built, just for fun</p>
         <h3 id="sakay-na-heading" class="h3-sm">Sakay Na!</h3>
@@ -416,12 +450,6 @@
           <a href="https://shishieyo.github.io/sakay-na/" target="_blank" rel="noopener">Play ↗</a>
           <a href="https://github.com/ShishieYo/sakay-na" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
-      </aside>
-
-      <aside class="side-project" aria-labelledby="ragnarok-heading">
-        <p class="side-project-label">Also built, just for fun</p>
-        <h3 id="ragnarok-heading" class="h3-sm">Project Ragnarok</h3>
-        <p>A private Ragnarok Online server, self-hosted via Docker on a home NAS — including custom scripting for in-game items and NPCs.</p>
       </aside>
     </div>
   </section>
@@ -530,12 +558,14 @@
           <ul>
             <li>React, Next.js &amp; TypeScript</li>
             <li>Supabase &amp; Postgres, Row Level Security</li>
+            <li>MariaDB</li>
             <li>Node.js, Express &amp; Tailwind CSS</li>
             <li>Google Apps Script</li>
-            <li>Docker &amp; self-hosting</li>
+            <li>Docker, Tailscale &amp; self-hosting</li>
             <li>Netlify</li>
             <li>Git &amp; GitHub</li>
             <li>Python</li>
+            <li>C++ &amp; Lua</li>
             <li>R</li>
           </ul>
         </div>
